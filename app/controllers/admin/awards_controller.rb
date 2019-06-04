@@ -15,6 +15,7 @@ class Admin::AwardsController < ApplicationController
   end
 
   def show
+    @award = Award.find_by(params[:award_id])
   end
 
   private

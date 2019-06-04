@@ -22,7 +22,6 @@ RSpec.describe "User visits awards index page" do
 
   context "as a regular user" do
     it "I cannot see the new award form" do
-      user = User.create(username: "Adam", password: "password")
       award_1 = Award.create(name: 'Wow')
       award_2 = Award.create(name: 'Cool')
 
@@ -40,7 +39,19 @@ RSpec.describe "User visits awards index page" do
 
       click_on "#{award_2.name}"
       expect(current_path).to eq(award_path(award_2))
+    end
 
+    it "I see a page with the awards's title and all songs that have won award" do
+      nicki = Artist.create!(name: "Nicki")
+      monster = nicki.songs.create!(title: "Monster", length: 123, play_count: 567)
+      trini = nicki.songs.create!(title: "Trini Dem Girls", length: 456, play_count: 789)
+      award_1 = trini.awards.create!(name: 'Wow')
+      award_2 = trini.awards.create!(name: 'Cool')
+
+      visit awards_path
+
+      click_on "#{award_1.name}"
+      expect(page).to have_content("Wow")
     end
   end
 end
