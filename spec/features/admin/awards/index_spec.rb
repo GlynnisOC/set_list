@@ -23,10 +23,15 @@ RSpec.describe "User visits awards index page" do
   context "as a regular user" do
     it "I cannot see the new award form" do
       user = User.create(username: "Adam", password: "password")
+      award_1 = Award.create(name: 'Wow')
+      award_2 = Award.create(name: 'Cool')
 
       visit awards_path
 
       expect(page).to_not have_content 'Create New Award'
+      
+      expect(page).to have_content("#{award_1.name}")
+      expect(page).to have_content("#{award_2.name}")
     end
   end
 end
