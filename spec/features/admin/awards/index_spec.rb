@@ -14,6 +14,12 @@ RSpec.describe "User visits awards index page" do
       visit admin_awards_path
 
       expect(page).to have_button 'Create New Award'
+
+      fill_in "Name", with: "This Band Sucks"
+      click_on 'Create New Award'
+
+      expect(current_path).to eq(awards_path)
+      expect(page).to have_content("This Band Sucks")
     end
   end
 end

@@ -1,8 +1,12 @@
+<% @awards.each do |award| %>
+  <%= award.name %>
+<% end %>
+
 <%= form_for @award, url: admin_awards_path do |a| %>
 
   <%= a.label :name %>
   <%= a.text_field :name %>
 
-  <%= a.submit "Create New Award" %>
+  <%= a.submit "Create New Award", url: admin_awards_path %>
 
 <% end %>
