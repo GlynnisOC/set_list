@@ -14,6 +14,9 @@ class Admin::AwardsController < ApplicationController
     redirect_to awards_path
   end
 
+  def show
+  end
+
   private
   def award_params
     params.require(:award).permit(:name)

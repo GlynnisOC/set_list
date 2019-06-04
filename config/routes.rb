@@ -36,4 +36,5 @@ Rails.application.routes.draw do
   end
 
   get '/awards', to: 'admin/awards#index', as: :awards
+  get '/awards/:id', to: 'admin/awards#show', as: :award
 end

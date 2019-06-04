@@ -29,18 +29,18 @@ RSpec.describe "User visits awards index page" do
       visit awards_path
 
       expect(page).to_not have_content 'Create New Award'
-      
+
       expect(page).to have_content("#{award_1.name}")
       expect(page).to have_content("#{award_2.name}")
+
+      click_on "#{award_1.name}"
+      expect(current_path).to eq(award_path(award_1))
+
+      visit awards_path
+
+      click_on "#{award_2.name}"
+      expect(current_path).to eq(award_path(award_2))
+
     end
   end
 end
-
-# As an unregistered user,
-#   When I visit the awards index, '/awards'
-#     I cannot see the admin-only form to create new awards,
-#     I see all awards
-#     Each award should be a link to that award's specific show page.
-#
-# (for testing purposes, I should see at least 2 awards on the page)
-# (testing should specifically check for absense of the form)
